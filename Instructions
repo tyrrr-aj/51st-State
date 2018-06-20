@@ -1,0 +1,36 @@
+Media folder should be placed in the 51state directory, right next the the s51 app.
+
+Due to it's size project is unfinished, but only a few minor views of the last processing stage are missing
+- it still easily satisfies/exceeds requiraments specified for the homework.
+
+General description:
+Game consist of turns, in which two players alternately take their actions. They lead fractions in post-apocaliptic world of Neuroshima,
+struggling for power measured in VPs (Victory Points). They build they empires from cards representing locations, which they can use
+in three different ways:
+- conquer and plunder them (one time big adventage)
+- make an agreement with them (constant little bonus)
+- incorporate them to one's empire, gaining it forever.
+Aside, there are more possibilities: there are Leaders (granting some resources one-time and some passive ability constantly)
+and instant cards (one-time bonus).
+
+Each turn does divide into phases, and so does the app:
+0. Initailly, things need to be set up - cards placed in proper decks, resource counters set o zero etc. (init view)
+1. Firstly, old resources are discarded, new are produced etc
+2. Then there comes the Lookup phase - players take cards from common stock one by one, till only one is left. This is the first program
+loop - lookup view does lead to itself many times, then proceeding to player_move view
+3. Player_move represents taking some action by player - he first choses what he will generaly do (use card from his table,
+play card from his hand, send workers for other resources two neutral store or oponnents open-produce factories), and then which
+card or resource would they specifically like to use. When player is done, program returns to the player_move view for his oponnent,
+which goes on untill both have passed. That makes the second program loop.
+4. After all players have passed, player_move wil redirect back to the first view - new_turn, thus creating a bigger loop outside of
+two already described. This stops when one of the players scores 30 VPs.
+
+
+Decks - they can be distingushed by their 'kind' attribute:
+- 'T' - Table - cards already incorporated in players empire, ready to use whenever it's time
+- 'H' - Hand - cards player can use - place in his table, conquer etc
+- 'P' - Pile - source of new cards during the game
+- 'D' - Discard - here all used cards wait for the next game
+- 'L' - cards available during the Lookup phase
+- 'F' - cards specific for fractions, never leaving the table
+- 'A' - agreements signed by player
