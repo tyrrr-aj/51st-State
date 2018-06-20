@@ -1,0 +1,28 @@
+<div align="center"><h1>{{ player.fraction_name }}</h1></div><br>
+<form action="{% url 's51:player_decision' player_num %}" method="post">
+{% csrf_token %}
+
+<br><input type="submit" value="Wybierz" />
+<input type="radio" name="choice" id="choice_pass" value="pass" /><label for="choice_pass"> Spasuj. </label><br>
+    
+<h2><input type="radio" name="choice" id="choice_table" value="table" /> Stół:</h2><br>
+<label for="choice_table">{% for card in table %}<img src="{{ card.graphic.url }}" alt="" width="150" height="207"> {% endfor %}</label>
+<br><br>
+    
+<h2><input type="radio" name="choice" id="choice_op" value="op" /> Otwarta produkcja przeciwnika:</h2><br>
+<label for="choice_op">{% for card in oponents_open_factories %}<img src="{{ card.graphic.url }}" alt="" width="150" height="207"> {% endfor %}</label>
+    
+<h2><input type="radio" name="choice" id="choice_hand" value="hand" /> Ręka:</h2><br>
+<label for="choice_hand">{% for card in hand %}<img src="{{ card.graphic.url }}" alt="" width="150" height="207"> {% endfor %}</label>
+<br><br>
+
+<h2><input type="radio" name="choice" id="choice_res" value="res" /> Zasoby:</h2><br>
+<label for="choice_res">{% for res in resource_list %}<img src="{{ res.symbol.url }}" alt="" width="50" height="50"> &nbsp &nbsp &nbsp &nbsp {% endfor %}</label>
+<br>{% for res in resources %}{{ res }}&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp{% endfor %}
+    
+<br><br>
+
+
+    
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</form>

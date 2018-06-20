@@ -1,0 +1,16 @@
+<div align="center">
+    <br>
+    <br>
+    <br>
+    <h1>{{ active_player.fraction_name }}:</h1>
+    <br>
+    <form action="{% url 's51:lookup_choice' number_of_cards %}" method="post">
+        {% csrf_token %}
+        {% for card in card_list %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value={{ forloop.counter }} />
+            <label for="choice{{ forloop.counter }}"><img src="{{ card.graphic.url }}" alt="" width="250" height="346"></label>
+        {% endfor %}
+        <input type="submit" value="Wybierz" />
+    </form>
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+</div>
